@@ -1,17 +1,15 @@
-"""Suggested perception interface; choose your team's own implementation."""
-from dataclasses import dataclass
-from geometry_msgs.msg import PoseStamped, Vector3
+"""Perception layer interface."""
 from sensor_msgs.msg import CameraInfo, Image
 
-
-@dataclass
-class ObjectEstimate:
-    label: str
-    pose: PoseStamped  # explicit frame and observation timestamp
-    size: Vector3     # metres
+from .types import ObjectEstimate
 
 
-def detect(rgb: Image, depth: Image, calibration: CameraInfo) -> list[ObjectEstimate]:
-    """TODO: estimate labels, poses and sizes from synchronized observations."""
+def detect(rgb: Image, depth: Image, calibration: CameraInfo,
+           tf_buffer=None, target_frame: str = 'world') -> list[ObjectEstimate]:
+    """Estimate labels, poses and sizes from synchronized observations.
+
+    Every estimate must carry a unique, stable ``id`` for the duration of the
+    task. The same physical cube must keep the same id across frames, because
+    planning uses it for collision-object names and attached objects.
+    """
     raise NotImplementedError
-

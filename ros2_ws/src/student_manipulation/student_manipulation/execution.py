@@ -1,12 +1,22 @@
-"""Suggested execution interfaces; no commands are sent by these stubs."""
+"""Execution layer interface."""
 from moveit_msgs.msg import RobotTrajectory
 
+from .types import ExecutionResult, Grasp, Place
 
-def execute(trajectory: RobotTrajectory) -> bool:
-    """TODO: execute a trajectory and evaluate completion from feedback."""
+
+def execute(trajectory: RobotTrajectory) -> ExecutionResult:
+    """Execute a trajectory and evaluate completion from feedback."""
     raise NotImplementedError
 
 
-def set_gripper(opening_m: float) -> bool:
-    """TODO: command the total finger separation and evaluate the result."""
+def set_gripper(opening_m: float) -> ExecutionResult:
+    """Command the total finger separation (0-0.08 m) and evaluate the result."""
+    raise NotImplementedError
+
+
+def close_gripper(grasp: Grasp) -> ExecutionResult:
+    raise NotImplementedError
+
+
+def open_gripper(place: Place) -> ExecutionResult:
     raise NotImplementedError

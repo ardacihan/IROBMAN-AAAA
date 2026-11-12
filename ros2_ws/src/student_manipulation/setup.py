@@ -5,5 +5,8 @@ setup(
     data_files=[('share/ament_index/resource_index/packages', ['resource/student_manipulation']),
                 ('share/student_manipulation', ['package.xml'])],
     install_requires=['setuptools'],
-    entry_points={'console_scripts': ['task = student_manipulation.task:main']},
+    entry_points={'console_scripts': [
+        'task = student_manipulation.task:main',
+        'ground_truth = student_manipulation.ground_truth:main',
+    ]},
 )
